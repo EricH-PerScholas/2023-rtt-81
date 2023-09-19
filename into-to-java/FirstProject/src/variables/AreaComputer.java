@@ -13,6 +13,8 @@ public class AreaComputer {
 		// Compute area
 		area = radius * radius * 3.14159;
 
+		int x = 5;
+
 		// Display results
 		System.out.println("The area for the circle of radius " + radius + " is " + area);
 	}
