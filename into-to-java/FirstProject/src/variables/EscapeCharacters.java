@@ -13,7 +13,12 @@ public class EscapeCharacters {
 		System.out.println("This is a tab character ->\t<-");
 		
 		// basic formating with tabs
+		// next 2 lines are the same, the first uses spaces
+		// and the 2nd uses tabs.   Tabs are 1 character
+		System.out.println("1       One             Col3");
 		System.out.println("1\tOne\t\tCol3");
+		
+		// then we can add another row to create a table
 		System.out.println("10\tTen\t\tCol3");
 		//this one is long so it only needs 1 tab for the 3rd column
 		System.out.println("100\tOne Hundred\tCol3"); 
