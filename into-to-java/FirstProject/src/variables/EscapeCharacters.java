@@ -6,7 +6,6 @@ public class EscapeCharacters {
 		
 		// the main ones to know are ... \t, \n, and \"
 		
-		
 		// for the language java \ (slash) is the escape character
 		
 		// this is an example of the tab escape character \t
