@@ -9,7 +9,10 @@ public class CoffeeShop {
 
 	// this of this as the menu the coffee shop has to offer
 	List<Product> products = new ArrayList<>();
-	
+
+	// this is the list of itmes in your order
+	List<Product> order = new ArrayList<>();
+
 	// this is a class member variable to make it easier
 	Scanner input = new Scanner(System.in);
 
@@ -36,6 +39,8 @@ public class CoffeeShop {
 	}
 
 	public void printProduct(Product product) {
+		// TODO HOMEWORK : Change this print only the product name + tab + price with a
+		// $
 		System.out.println("Product name : " + product.getName() + " Price : " + product.getPrice());
 	}
 
@@ -71,28 +76,51 @@ public class CoffeeShop {
 		double totalSale = subTotal + salesTax;
 		System.out.println("Total\t\t" + df.format(totalSale));
 	}
-	
-	public int userSelect() {
+
+	public int displayMainUserMenu() {
 		System.out.println("1) Print the menu items and prices");
 		System.out.println("2) Add an item to your order");
 		System.out.println("3) Print the itmes in your order");
 		System.out.println("4) Checkout");
-		
+		System.out.println("5) Exit");
+
 		System.out.print("\nWhat do you want to do? ");
 		int select = input.nextInt();
-		
+		input.nextLine();
+
 		return select;
+	}
+
+	public void userSelectProduct() {
+		System.out.print("Enter product name to order: ");
+		String orderSelection = input.nextLine();
+
+		for (Product product : products) {
+			if (product.getName().equalsIgnoreCase(orderSelection)) {
+				order.add(product);
+				System.out.println("Added " + product.getName() + " to your order.");
+			}
+		}
 	}
 
 	public static void main(String[] args) {
 		CoffeeShop cf = new CoffeeShop();
 		cf.setupProducts();
-		
-		int userSelection = cf.userSelect();
-		if ( userSelection == 1 ) {
-			cf.printAllProducts();
-		} else {
-			System.out.println("User input " + userSelection + " is unknonw.   Try again;");
+
+		while (true) {
+			int userSelection = cf.displayMainUserMenu();
+			
+			if (userSelection == 1) {
+				cf.printAllProducts();
+			} else if (userSelection == 2) {
+				cf.userSelectProduct();
+			} else if (userSelection == 3 ) {
+				// TODO HOMEWOK - display the products in the order list here
+			} else if ( userSelection == 5) {
+				System.exit(0);
+			} else {
+				System.out.println("User input " + userSelection + " is unknonw.   Try again;");
+			}
 		}
 	}
 }
