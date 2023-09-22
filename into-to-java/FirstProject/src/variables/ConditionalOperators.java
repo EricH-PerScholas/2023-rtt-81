@@ -17,7 +17,7 @@ public class ConditionalOperators {
 		if (conditionOne != conditionTwo) {
 			// both variables not are the same
 			System.out.println("Both variables are not the same");
-		}	
+		}
 
 		// && is and
 		if (conditionOne && conditionTwo) {
