@@ -46,6 +46,8 @@ public class StringExamples {
 		if (s1.toLowerCase().equals(s2.toLowerCase())) {
 			// this is the same as equalsIgnoreCase
 		}
+		
+		Boolean b = true;
 
 		String upper = s1.toUpperCase();
 		String lower = s1.toLowerCase();
