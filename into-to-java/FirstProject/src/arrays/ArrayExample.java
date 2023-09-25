@@ -56,6 +56,12 @@ public class ArrayExample {
 		// write a for loop that tells me the last position of null in the array
 		// write a for loop that starts at the final position in the array and counts down to the first
 		
+		String letters = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+		
+		// use letters.split(",") to make an array of letters
+		// loop over the array and count the number of letters that are not vowels
+		
+		
 		System.out.println("Position of the first null is " + firstNull);
 	}
 
