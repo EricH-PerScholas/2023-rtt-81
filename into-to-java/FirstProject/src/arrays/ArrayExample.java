@@ -1,5 +1,7 @@
 package arrays;
 
+import java.util.Arrays;
+
 public class ArrayExample {
 
 	public static void main(String[] args) {
@@ -7,6 +9,7 @@ public class ArrayExample {
 
 		// this creates a new array of type double with 20 elements ... 0 to 19
 		double[] doubleArray = new double[arraySize];
+		Arrays.fill(doubleArray,5.5);
 
 		String[] stringArray = new String[arraySize];
 		stringArray[1] = "one";
@@ -131,12 +134,16 @@ public class ArrayExample {
 		String vowels = "aeiou";
 
 		int numberOfLettersEnhanced = 0;
-		for (String letter : lettersArray) {
+		for (String letter : letters.split(",")) {
 			if (!vowels.contains(letter)) {
 				numberOfLettersEnhanced = numberOfLettersEnhanced + 1;
 			}
 		}
 		System.out.println("Number of letters enhanced = " + numberOfLettersEnhanced);
+		
+		
+		// this is basically doing a for loop and printing the result
+		System.out.println(Arrays.toString(lettersArray));
 
 	}
 
