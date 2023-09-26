@@ -41,28 +41,103 @@ public class ArrayExample {
 			}
 		}
 		System.out.println("Number of nulls is " + nullCount);
-		
+
 		// write a for loop that tells me the location of the first null in the array
 		// this is going to use the non-enhanced for loop
 		int firstNull = -1;
 		for (int pos = 0; pos < stringArray.length; pos++) {
-			if ( stringArray[pos] == null ) {
+			if (stringArray[pos] == null) {
 				firstNull = pos;
 				break;
 			}
 		}
-		
+
 		// write a for loop that tells me how many values are not null
+		// this is using an old style for loop with an array location
+		int notNullCount = 0;
+		for (int pos = 0; pos < stringArray.length; pos++) {
+			if (stringArray[pos] != null) {
+				notNullCount = notNullCount + 1;
+			}
+		}
+		System.out.println("Number of null values in array is " + notNullCount);
+
+		// same solution with an enhance for loop -- this is a little bit more simple
+		// solution
+		// with the enhanced for loop you are not able to get the position of the value
+		// in the array
+		int notNullCountEnhanced = 0;
+		for (String value : stringArray) {
+			if (value != null) {
+				notNullCountEnhanced = notNullCountEnhanced + 1;
+			}
+		}
+		System.out.println("Number of null values in array is " + notNullCountEnhanced);
+
 		// write a for loop that tells me the last position of null in the array
-		// write a for loop that starts at the final position in the array and counts down to the first
-		
-		String letters = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
-		
+		// by last null position we mean the position with the highest value
+		// this looks at all 10 values in the array
+		int lastNullPosition = -1;
+		for (int pos = 0; pos < stringArray.length; pos++) {
+			if (stringArray[pos] == null) {
+				lastNullPosition = pos;
+			}
+		}
+		if (lastNullPosition == -1) {
+			System.out.println("The array does not have a null");
+		} else {
+			System.out.println("The last null of the array is in position " + lastNullPosition);
+		}
+
+		// more efficient because it can break the loop once it found its answer
+		// starts at the end of the array and counts down to the first
+		int lastNullPositionReverse = -1;
+		for (int pos = stringArray.length - 1; pos >= 0; pos--) {
+			if (stringArray[pos] == null) {
+				lastNullPositionReverse = pos;
+				break;
+			}
+		}
+		if (lastNullPositionReverse == -1) {
+			System.out.println("The array does not have a null");
+		} else {
+			System.out.println("The last null of the array is in position " + lastNullPositionReverse);
+		}
+
 		// use letters.split(",") to make an array of letters
 		// loop over the array and count the number of letters that are not vowels
-		
-		
-		System.out.println("Position of the first null is " + firstNull);
+		String letters = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+
+		String[] lettersArray = letters.split(",");
+		int numberOfLetters = 0;
+		for (int pos = 0; pos < lettersArray.length; pos++) {
+			if (lettersArray[pos].equals("a")) {
+				continue;
+			} else if (lettersArray[pos].equals("e")) {
+				continue;
+			} else if (lettersArray[pos].equals("i")) {
+				continue;
+			} else if (lettersArray[pos].equals("o")) {
+				continue;
+			} else if (lettersArray[pos].equals("u")) {
+				continue;
+			}
+
+			numberOfLetters = numberOfLetters + 1;
+		}
+		System.out.println("Number of letters = " + numberOfLetters);
+
+		// using an enhanced loop and much less code
+		String vowels = "aeiou";
+
+		int numberOfLettersEnhanced = 0;
+		for (String letter : lettersArray) {
+			if (!vowels.contains(letter)) {
+				numberOfLettersEnhanced = numberOfLettersEnhanced + 1;
+			}
+		}
+		System.out.println("Number of letters enhanced = " + numberOfLettersEnhanced);
+
 	}
 
 }
