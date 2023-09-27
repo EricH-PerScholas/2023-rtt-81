@@ -3,6 +3,8 @@ package loops;
 import java.util.Scanner;
 
 public class GreatestCommonDivisor {
+	
+	
 
 	public static void main(String[] args) {
 		
@@ -40,7 +42,7 @@ public class GreatestCommonDivisor {
 		System.out.println("The gcd of " + n1 + " and " + n2 + " is " + gcd);
 	}
 	
-	public static int readPositiveNumber(Scanner scanner) {
+	private static int readPositiveNumber(Scanner scanner) {
 		int number = -1;
 		while ( number <= 0 ) {
 			System.out.print("Enter a positive integer greater than 0 : ");

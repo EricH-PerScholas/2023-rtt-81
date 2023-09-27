@@ -10,7 +10,7 @@ public class CoffeeShop {
 	// this of this as the menu the coffee shop has to offer
 	List<Product> products = new ArrayList<>();
 
-	// this is the list of itmes in your order
+	// this is the list of items in your order
 	List<Product> order = new ArrayList<>();
 
 	// this is a class member variable to make it easier
@@ -36,6 +36,12 @@ public class CoffeeShop {
 		sandwich.setName("Egg & Cheese Muffin");
 		sandwich.setPrice(19.99);
 		products.add(sandwich);
+		
+		Product water = new Product("Water", 5.99);
+		products.add(1,water);
+		
+		//products.remove(0);
+		//products.add(0,water);
 	}
 
 	public void printProduct(Product product) {
@@ -101,6 +107,10 @@ public class CoffeeShop {
 				System.out.println("Added " + product.getName() + " to your order.");
 			}
 		}
+	}
+	
+	public List<Product> getProducts() {
+		return products;
 	}
 
 	public static void main(String[] args) {
