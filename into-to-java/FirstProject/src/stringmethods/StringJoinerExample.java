@@ -5,26 +5,45 @@ import java.util.StringJoiner;
 public class StringJoinerExample {
 
 	public static void main(String[] args) {
-		String x = new String("a string value");
-		StringBuffer st = new StringBuffer("Initialize the string buffer with this");
-		
-		int y = 0;
-		
-		
-		String[] arr = { "a", "b", "c", "d", "e" };
+		StringJoiner joiner = new StringJoiner("|", "=", "="); 
 
-		// In the box was a tire, a saw, a pig
+		joiner.add("Java");
+		joiner.add("Python");
+		joiner.add("C Sharp");
+		joiner.add("Javascript");
+				
+		System.out.println(joiner);
 		
-		for ( int pos = 0 ; pos < arr.length ; pos++ ) {
-			System.out.print(arr[pos]);
-			if ( pos < arr.length - 1 ) {
-				System.out.print(",");
-			}
-		}
+		
+		
+		StringJoiner joinNames = new StringJoiner(",", "[", "]");
+		/* passing comma(,) and square-brackets as delimiter */
+		// ----- Adding values to StringJoiner---
+		joinNames.add("New York");
+		joinNames.add("New Jersey");
 
+		// ---- Creating StringJoiner with :(colon) delimiter
+		StringJoiner joinNames2 = new StringJoiner(":", "{", "}");
+		/* passing colon(:) and square-brackets as delimiter */
+
+		// ---Adding values to StringJoiner-----
+		joinNames2.add("Dallas");
+		joinNames2.add("Chicago");
+		
+		// ---- Merging two StringJoiner ----
+		StringJoiner merge = joinNames.merge(joinNames2);
+		System.out.println(merge);
+		
+		
+		
+		//{Name:Tony:LastName,Strak}    this is it!  right here
+		StringJoiner sj1 = new StringJoiner(":", "{", "}");
+		StringJoiner sj2 = new StringJoiner(",", "[", "]");	
+		sj1.add("Name").add("Tony");
+		sj2.add("LastName").add("Stark");
+		System.out.println(sj1.merge(sj2).toString());
+		
 		
 	}
 
 }
-
-
