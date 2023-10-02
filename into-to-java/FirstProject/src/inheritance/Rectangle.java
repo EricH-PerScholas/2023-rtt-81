@@ -33,4 +33,9 @@ public class Rectangle extends Shape {
 		this.width = width;
 	}
 
+	@Override
+	public double calculateParimiter() {
+		return (2*width) + (2*height);
+	}
+
 }

@@ -25,4 +25,9 @@ public class Circle extends Shape {
 		return 3.14159 * getDiameter() * getDiameter();
 	}
 
+	@Override
+	public double calculateParimiter() {
+		return (3.14159 * 2) * getRadius();
+	}
+
 }
