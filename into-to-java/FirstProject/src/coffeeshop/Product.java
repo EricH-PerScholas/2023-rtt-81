@@ -2,6 +2,8 @@ package coffeeshop;
 
 public class Product {
 
+	public static String CONSTANT = "Constant";
+	
 	private String name;
 	private double price;
 	

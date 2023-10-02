@@ -6,13 +6,15 @@ import java.util.List;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		
 		// area = l * w
 		Rectangle rect = new Rectangle();
 		rect.setName("Rectangle");
 		rect.setHeight(10);
 		rect.setWidth(5);
+		
+		Area a = (Area)rect;
+		Shape s = (Shape)rect;
+
 		
 		// area = pi * r * r
 		Circle circle = new Circle();

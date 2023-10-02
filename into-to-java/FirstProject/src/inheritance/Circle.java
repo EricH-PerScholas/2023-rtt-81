@@ -22,12 +22,12 @@ public class Circle extends Shape {
 	@Override
 	public double calculateArea() {
 		// TODO Auto-generated method stub
-		return 3.14159 * getDiameter() * getDiameter();
+		return PI * getDiameter() * getDiameter();
 	}
 
 	@Override
 	public double calculateParimiter() {
-		return (3.14159 * 2) * getRadius();
+		return (PI * 2) * getRadius();
 	}
 
 }

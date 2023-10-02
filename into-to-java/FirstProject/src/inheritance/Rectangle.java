@@ -16,6 +16,11 @@ public class Rectangle extends Shape {
 	public double calculateArea() {
 		return height * width;
 	}
+	
+	@Override
+	public double calculateParimiter() {
+		return (2*width) + (2*height);
+	}
 
 	public double getHeight() {
 		return height;
@@ -32,10 +37,26 @@ public class Rectangle extends Shape {
 	public void setWidth(double width) {
 		this.width = width;
 	}
-
+	
 	@Override
-	public double calculateParimiter() {
-		return (2*width) + (2*height);
+	public String toString() {
+		// this is overriding the toStrign method of the Java Object
+		return getName();
 	}
+
+	
+	
+	
+	// this is an example of overloading not to be confused with overriding
+	// overloading is based on the data type of the arguments
+	public void method1(String arg1) {
+		
+	}
+	
+	public void method1(int arg1) {
+		
+	}
+	
+	
 
 }

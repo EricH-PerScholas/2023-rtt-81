@@ -12,6 +12,8 @@ public abstract class Shape implements Area {
 		this.name = name;
 	}
 	
-	abstract public double calculateParimiter();
+	public double calculateParimiter() {
+		return 0.0;
+	}
 
 }
