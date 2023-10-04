@@ -1,5 +1,6 @@
 package exceptions;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ExceptionExamples {
@@ -7,7 +8,14 @@ public class ExceptionExamples {
 	public static void main(String[] args) {
 		ExceptionExamples ee = new ExceptionExamples();
 		try {
+			// this will cause a null pointer exception
+			//String x = null;
+			//x.toUpperCase();
+			
+			
 			ee.readNumber();
+			
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -27,6 +35,8 @@ public class ExceptionExamples {
 
 			// this code executes only if no exception occurs
 			System.out.println("You entered the number : " + x);
+		} catch (ArrayIndexOutOfBoundsException ioe) {
+			// can catch a specific type of exception and deal with it
 		} catch (Exception e) {
 			// this code executes only if an exception occurs
 			System.out.println("The error message is : " + e.getMessage());

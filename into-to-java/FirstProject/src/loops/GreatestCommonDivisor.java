@@ -42,6 +42,9 @@ public class GreatestCommonDivisor {
 		System.out.println("The gcd of " + n1 + " and " + n2 + " is " + gcd);
 	}
 	
+	
+	// make this catch an exception if the user enters letters
+	// create a new GCDException that extends Exception and is thrown when a user enters a non number
 	private static int readPositiveNumber(Scanner scanner) {
 		int number = -1;
 		while ( number <= 0 ) {
