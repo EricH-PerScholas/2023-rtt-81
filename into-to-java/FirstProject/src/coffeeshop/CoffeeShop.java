@@ -26,7 +26,7 @@ public class CoffeeShop {
 		tea.setName("Tea");
 		tea.setPrice(4.33);
 		products.add(tea);
-
+	
 		Product cookie = new Product();
 		cookie.setName("Cookie");
 		cookie.setPrice(6.77);
