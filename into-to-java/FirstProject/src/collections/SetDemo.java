@@ -1,8 +1,10 @@
 package collections;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -19,8 +21,8 @@ public class SetDemo {
 		stringList.get(1);
 		
 		
+		// set does not maintain position ... even if it looks like it does .. it doesnt
 		Set<String> stringSet = new HashSet<>();
-		
 		stringSet.add("c");
 		stringSet.add("b");
 		stringSet.add("a");
@@ -33,5 +35,6 @@ public class SetDemo {
 		for ( String string : stringSet ) {
 			System.out.println(string);
 		}
+		
 	}
 }
