@@ -125,11 +125,20 @@ and c.id = 141
 order by product_name asc;
 
 -- show me the customer name, the product name, and the total quantaity orderd of each product - using sum()
-
-
+select c.customer_name, p.product_name, sum(od.quantity_ordered) as total_quantity_ordered
+from customers c, orders o, orderdetails od, products p
+where c.id = o.customer_id
+and o.id = od.order_id
+and p.id = od.product_id
+group by c.id, p.id
+order by customer_name asc, total_quantity_ordered desc;
 
 -- show me the name of the product line and the number of products in each product line
+select * from productlines;
+
+select pl.product_line, count(p.id)
+from products p, productlines pl
+where pl.id = p.productline_id
+group by pl.id;
 
 
-
--- 
