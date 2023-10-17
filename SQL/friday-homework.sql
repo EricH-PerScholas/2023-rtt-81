@@ -20,6 +20,7 @@ where  c.id = p.customer_id
 group by p.customer_id 
 order by total_amount desc;
 
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! This is very similar to the SBA question
 -- for each customer show the min payment amount, max payment amount, total payments, number of payments, and average payment
 select c.id, c.customer_name, min(p.amount) as minimum_payment_amount, max(p.amount) as max_payment_amount, sum(p.amount) as total_payment, count(*) as payment_count,
 avg(p.amount) as average_payment
