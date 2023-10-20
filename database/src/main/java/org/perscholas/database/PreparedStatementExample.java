@@ -31,15 +31,18 @@ public class PreparedStatementExample {
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Enter an employee first name :");
 			String firstname = scanner.nextLine();
+			System.out.println("Enter an employee last name : ");
+			String lastname = scanner.nextLine();
 
 			//String sql = "Select * FROM employees where firstname = '" + firstname + "'";
-			String sql = "Select * FROM employees where firstname = ?";
+			String sql = "Select * FROM employees where firstname = ? and lastname = ?";
 			System.out.println(sql);			
 			
 			// this is the secure way of creating a query
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			// the first ? in the query is position 1
 			stmt.setString(1, firstname);
+			stmt.setString(2, lastname);
 
 			// in this line of code we are not going to pass in the SQL because we have already 
 			// passed it into the prepared statement
@@ -48,8 +51,9 @@ public class PreparedStatementExample {
 			while (result.next()) {
 				Integer id = result.getInt("id");
 				String name = result.getString("firstname");
+				String lname = result.getString("lastname");
 				String email = result.getString("email");
-				System.out.println(id + " | " + name + " | " + email);
+				System.out.println(id + " | " + name + " | " + lname + " | " + email);
 			}
 
 			result.close();
