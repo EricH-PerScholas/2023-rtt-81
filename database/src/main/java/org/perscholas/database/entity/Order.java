@@ -25,5 +25,7 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date orderDate;
 	
+    @Column(name = "comments", columnDefinition="TEXT")
+    private String comments;
 	
 }
