@@ -50,7 +50,7 @@ public class Customer {
 	@Column(name = "sales_rep_employee_id")
 	private Integer salesRepEmployeeId;
 	
-	@Column(name = "credit_limit")
+	@Column(name = "credit_limit", columnDefinition="Decimal(10,2)")
 	private Double creditLimit;
 	
 	// ------ getters and setters ------
