@@ -43,6 +43,9 @@ public class CreateOrderExample {
 	public void queryOrder() {
 		Order o = orderDao.findById(10100);
 		
+		// this gets the customer for this order 10100
+		// hibernate will write and execute the query for itself -- no code needed other than
+		// the setup linkage annotations
 		Customer c = o.getCustomer();
 		
 		System.out.println("Order " + o.getId() + " was made by customer " + c.getCustomerName() + " on " + o.getOrderDate());

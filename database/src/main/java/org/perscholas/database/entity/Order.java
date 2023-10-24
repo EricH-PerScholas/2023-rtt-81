@@ -27,10 +27,11 @@ public class Order {
 	// insertable and updateble to false.
 	// we need to do this because we now have a @ManyToOne annotation
 	// that is working on the customer_id field also.
-    @Column(name = "customer_id", insertable = false, updatable = false)
+	 @Column(name = "customer_id", insertable = false, updatable = false)
     private Integer customerId;
     
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+	// https://attacomsian.com/blog/spring-data-jpa-one-to-many-mapping
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
     
