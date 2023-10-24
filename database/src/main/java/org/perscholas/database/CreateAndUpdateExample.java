@@ -54,7 +54,8 @@ public class CreateAndUpdateExample {
 	}
 	
 	public void listQuery() {
-		List<Customer> customers = customerDao.findByFirstName(null);
+		List<Customer> customers = customerDao.findByFirstName("Eric");
+		
 		System.out.println("We found " + customers.size() + " records in the database");
 	}
 
