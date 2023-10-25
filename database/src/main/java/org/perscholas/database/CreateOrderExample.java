@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.perscholas.database.dao.CustomerDAO;
 import org.perscholas.database.dao.OrderDAO;
 import org.perscholas.database.entity.Customer;
 import org.perscholas.database.entity.Order;
@@ -15,15 +16,19 @@ public class CreateOrderExample {
 
 	private OrderDAO orderDao = new OrderDAO();
 	
-	
+	private CustomerDAO customerDao = new CustomerDAO();
 	
 	public void createOrder() throws ParseException {
+		Customer c = customerDao.findById(128);
+		
 		Order order = new Order();
+		
+		// when I want to add a customer to the order I need to add the customer object
+		order.setCustomer(c);
 		
 		// makes a new date object that represents right now
 		Date orderDate = new Date();
 		order.setOrderDate(orderDate);
-		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date requredDate = sdf.parse("2023-10-31 12:30");
@@ -37,6 +42,10 @@ public class CreateOrderExample {
 		// yet shipped
 		order.setShippedDate(null);
 		
+		order.setStatus("Pending");
+		order.setComments("Comments");
+		
+		orderDao.save(order);
 		
 	}
 	
@@ -61,8 +70,8 @@ public class CreateOrderExample {
 	public static void main(String[] args) {
 		CreateOrderExample x = new CreateOrderExample();
 		try {
-			//x.createOrder();
-			x.queryOrder();
+			x.createOrder();
+			//x.queryOrder();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
