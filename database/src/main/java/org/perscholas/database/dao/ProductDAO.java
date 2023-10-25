@@ -25,6 +25,7 @@ public class ProductDAO {
 
 		try {
 			Product result = query.getSingleResult();
+			
 			return result;
 		} catch (NoResultException nre) {
 			return null;
@@ -35,12 +36,14 @@ public class ProductDAO {
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		Session session = factory.openSession();
 
-		String hql = "FROM Product p WHERE p.name = :name"; // Example of HQL to get all records of user class
+		String hql = "FROM Product p WHERE p.productName = :name"; // Example of HQL to get all records of user class
 
 		TypedQuery<Product> query = session.createQuery(hql, Product.class);
 		query.setParameter("name", name);
-
-		return query.getResultList();
+		List<Product> result = query.getResultList();
+		session.close();
+		
+		return result;
 	}
 	
 	
@@ -51,6 +54,7 @@ public class ProductDAO {
 		Transaction t = session.beginTransaction();
 		session.saveOrUpdate(product);
 		t.commit();
+		session.close();
 	}
 	
 }

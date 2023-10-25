@@ -24,10 +24,13 @@ public class OrderDAO {
 
 		try {
 			Order result = query.getSingleResult();
+			session.close();
+			
 			return result;
 		} catch (NoResultException nre) {
 			return null;
 		}
+	
 	}
 	
 	public List<Order> findByCustomerId(Integer customerId) {
@@ -43,6 +46,8 @@ public class OrderDAO {
 		query.setParameter("customerId", customerId);
 
 		List<Order> result = query.getResultList();
+		session.close();
+		
 		return result;
 	}
 	
@@ -61,6 +66,7 @@ public class OrderDAO {
 
 		session.saveOrUpdate(order);
 		t.commit();
+		session.close();
 	}
 	
 }
