@@ -30,8 +30,8 @@ public class Order {
 	// insertable and updateble to false.
 	// we need to do this because we now have a @ManyToOne annotation
 	// that is working on the customer_id field also.
-	@Column(name = "customer_id", insertable = false, updatable = false)
-	private Integer customerId;
+//	@Column(name = "customer_id", insertable = false, updatable = false)
+//	private Integer customerId;
 
 	// https://attacomsian.com/blog/spring-data-jpa-one-to-many-mapping
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -39,7 +39,7 @@ public class Order {
 	private Customer customer;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<OrderDetail> orderdetail;
+	private List<OrderDetail> orderDetails;
 
 	@Column(name = "order_date")
 	@Temporal(TemporalType.DATE)
@@ -67,13 +67,13 @@ public class Order {
 		this.id = id;
 	}
 
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
+//	public Integer getCustomerId() {
+//		return customerId;
+//	}
+//
+//	public void setCustomerId(Integer customerId) {
+//		this.customerId = customerId;
+//	}
 
 	public Date getOrderDate() {
 		return orderDate;
@@ -122,5 +122,15 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+
 
 }

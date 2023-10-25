@@ -18,10 +18,6 @@ public class OrderDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
-	// this becomes read only
-	@Column(name="order_id", insertable=false, updatable = false)
-	private Integer orderId;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "order_id", nullable = false)
@@ -44,15 +40,7 @@ public class OrderDetail {
 	
 	
 	
-	
 
-	public Integer getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
 
 	public Integer getQuantutyOrdered() {
 		return quantutyOrdered;
