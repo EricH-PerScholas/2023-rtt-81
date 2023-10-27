@@ -30,7 +30,6 @@ public class OrderDAO {
 		} catch (NoResultException nre) {
 			return null;
 		}
-	
 	}
 	
 	public List<Order> findByCustomerId(Integer customerId) {
