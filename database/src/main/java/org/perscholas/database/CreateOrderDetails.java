@@ -16,7 +16,6 @@ import org.perscholas.database.entity.Product;
 public class CreateOrderDetails {
 
 	
-	
 	private OrderDAO orderDAO = new OrderDAO();
 	private ProductDAO productDAO = new ProductDAO();
 	private OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAO();
