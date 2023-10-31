@@ -2,6 +2,7 @@ package org.perscholas.database.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -131,6 +132,29 @@ public class Order {
 		this.orderDetails = orderDetails;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(comments, id, orderDate, requiredDate, shippedDate, status);
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		return Objects.equals(comments, other.comments) && Objects.equals(id, other.id)
+				&& Objects.equals(orderDate, other.orderDate) && Objects.equals(requiredDate, other.requiredDate)
+				&& Objects.equals(shippedDate, other.shippedDate) && Objects.equals(status, other.status);
+	}
+
+	
+
+	
+	
+	
 
 }

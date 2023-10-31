@@ -32,6 +32,15 @@ public class CustomerDAO {
 			return null;
 		}
 	}
+	
+	public Customer updateFirstName(Integer id, String firstName) {
+		Customer save = findById(id);
+		
+		save.setContactFirstname(firstName);
+
+		return save(save);
+	}
+	
 
 	// by contrast a method that returns a list will ALWAYS return a list
 	// this kind of method never returns null
@@ -54,7 +63,7 @@ public class CustomerDAO {
 		return result;
 	}
 
-	public void save(Customer save) {
+	public Customer save(Customer save) {
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		Session session = factory.openSession();
 
@@ -69,6 +78,8 @@ public class CustomerDAO {
 		session.saveOrUpdate(save);
 		t.commit();
 		session.close();
+		
+		return save;
 	}
 
 }
