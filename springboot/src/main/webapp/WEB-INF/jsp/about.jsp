@@ -9,7 +9,7 @@
     <title>Class Example Project</title>
 </head>
 <body>
-<h1>Index Page</h1>
-<p>Here is a paragraph - adding more text to this </p>
+<h1>About Page</h1>
+<p>This is my about page</p>
 </body>
 </html>
