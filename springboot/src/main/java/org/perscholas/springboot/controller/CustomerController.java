@@ -16,6 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CustomerController {
 
+    // create an employee table with the following columns: id, first_name, last_name, department_name
+    // create an entity and a dao for the employee table
+    // create a controller for the employee table
+    // create a form bean for the employee table
+    // create an html page with the form on it
+
+
     @Autowired
     private CustomerDAO customerDao;
 
