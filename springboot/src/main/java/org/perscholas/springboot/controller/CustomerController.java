@@ -14,27 +14,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 public class CustomerController {
 
-    // ERROR
-    // WARN
-    // INFO
-    // DEBUG
-    // TRACE
-
-
-
-    // create an employee table with the following columns: id, first_name, last_name, department_name
-    // create an entity and a dao for the employee table
-    // create a controller for the employee table
-    // create a form bean for the employee table
-    // create an html page with the form on it
+    // add a label to the existing form input for first name
+    // add a 2nd form input for last name
+    // change the controller to accept the new form input for last name as well as first name
+    // change the query to search by first name OR last name
+    // change the query to use like for both first name and last name
+    // make both search fields populate the user input if it was given
 
 
     @Autowired
     private CustomerDAO customerDao;
+
+    @GetMapping("/customer/search")
+    public ModelAndView search(@RequestParam(required = false) String search) {
+        ModelAndView response = new ModelAndView("customer/search");
+        log.debug("in the customer search controller method : search parameter = " + search);
+
+        if ( search != null ) {
+            List<Customer> customers = customerDao.findByFirstName(search);
+            response.addObject("customerVar", customers);
+            response.addObject("search", search);
+
+            for ( Customer customer : customers ) {
+                log.debug("customer: id = " + customer.getId() + " last name = " + customer.getLastName());
+            }
+        }
+
+        return response;
+    }
+
 
     @GetMapping("/customer/create")
     public ModelAndView createCustomer() {
