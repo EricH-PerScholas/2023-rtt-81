@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.formbean.CreateCustomerFormBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Controller
 public class CustomerController {
+
+    // ERROR
+    // WARN
+    // INFO
+    // DEBUG
+    // TRACE
+
+
 
     // create an employee table with the following columns: id, first_name, last_name, department_name
     // create an entity and a dao for the employee table
@@ -30,7 +40,8 @@ public class CustomerController {
     public ModelAndView createCustomer() {
         ModelAndView response = new ModelAndView("customer/create");
 
-        log.info("In create customer with no args");
+        log.debug("In create customer with no args - log.debug");
+        log.info("In create customer with no args - log.info");
 
         return response;
     }
@@ -41,7 +52,7 @@ public class CustomerController {
     public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
         ModelAndView response = new ModelAndView("customer/create");
 
-        log.info("firstName: " + form.getXyz());
+        log.debug("firstName: " + form.getXyz());
         log.info("lastName: " + form.getLastName());
         log.info("phone: " + form.getPhone());
         log.info("city: " + form.getCity());
