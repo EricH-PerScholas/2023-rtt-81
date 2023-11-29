@@ -1,5 +1,6 @@
 package org.perscholas.springboot.controller;
 
+import io.micrometer.common.util.StringUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,16 +34,32 @@ public class CustomerController {
     private CustomerDAO customerDao;
 
     @GetMapping("/customer/search")
-    public ModelAndView search(@RequestParam(required = false) String search) {
+    public ModelAndView search(@RequestParam(required = false) String firstNameSearch,
+                               @RequestParam(required = false) String lastNameSearch) {
         ModelAndView response = new ModelAndView("customer/search");
-        log.debug("in the customer search controller method : search parameter = " + search);
 
-        if ( search != null ) {
-            List<Customer> customers = customerDao.findByFirstName(search);
+        log.debug("in the customer search controller method : first name = " + firstNameSearch + " last name = " + lastNameSearch);
+
+        if (!StringUtils.isEmpty(firstNameSearch) || !StringUtils.isEmpty(lastNameSearch)) {
+
+            response.addObject("firstNameSearch", firstNameSearch);
+            response.addObject("lastNameSearch", lastNameSearch);
+
+            if (!StringUtils.isEmpty(firstNameSearch)) {
+                firstNameSearch = "%" + firstNameSearch + "%";
+            }
+
+            if (!StringUtils.isEmpty(lastNameSearch)) {
+                lastNameSearch = "%" + lastNameSearch + "%";
+            }
+
+            // we only want to do this code if the user has entered either a first name or a last name
+            List<Customer> customers = customerDao.findByFirstNameOrLastName(firstNameSearch, lastNameSearch);
+
             response.addObject("customerVar", customers);
-            response.addObject("search", search);
 
-            for ( Customer customer : customers ) {
+
+            for (Customer customer : customers) {
                 log.debug("customer: id = " + customer.getId() + " last name = " + customer.getLastName());
             }
         }
