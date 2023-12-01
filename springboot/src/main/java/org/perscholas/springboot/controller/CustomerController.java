@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.formbean.CreateCustomerFormBean;
+import org.perscholas.springboot.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,25 @@ public class CustomerController {
     // make both search fields populate the user input if it was given
 
 
+    // --- component scan phase 1
+    // 1. Find all classes with @Component, @Service, @Repository, @Controller, @RestController and instantiate them and add them to the spring context
+    // 2. Find all classes with @Configuration and instantiate them and add them to the Spring context
+    // 3. Runs all the methods in the Configuration classes and anything marked with @Bean will be added them to the Spring context
+    // 4. Find all classes with @ControllerAdvice and add them to the Spring context
+
+    // -- component scan phase 2
+    // 1. Inject all of the dependencies using @Autowired
+
+    // -- component scan phase 3
+    // 1. Run all of the methods marked with @PostConstruct
+
+
+
     @Autowired
     private CustomerDAO customerDao;
+
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/customer/search")
     public ModelAndView search(@RequestParam(required = false) String firstNameSearch,
@@ -84,18 +102,7 @@ public class CustomerController {
     public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
         ModelAndView response = new ModelAndView("customer/create");
 
-        log.debug("firstName: " + form.getXyz());
-        log.info("lastName: " + form.getLastName());
-        log.info("phone: " + form.getPhone());
-        log.info("city: " + form.getCity());
-
-        Customer customer = new Customer();
-        customer.setFirstName(form.getXyz());
-        customer.setLastName(form.getLastName());
-        customer.setPhone(form.getPhone());
-        customer.setCity(form.getCity());
-
-        customerDao.save(customer);
+        customerService.createCustomer(form);
 
         log.info("In create customer with incoming args");
 
