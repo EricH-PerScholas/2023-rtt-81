@@ -10,10 +10,12 @@ import org.perscholas.springboot.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -85,6 +87,44 @@ public class CustomerController {
         return response;
     }
 
+//    @GetMapping("/customer/delete/{customerId}")
+//    public ModelAndView deleteCustomer(@PathVariable int customerId) {
+//        ModelAndView response = new ModelAndView("customer/search");
+//
+//        Customer customer = customerDao.findById(customerId);
+//
+//        if ( customer != null ) {
+//            customerDao.delete(customer);
+//        } else {
+//            log.warn("Customer with id " + customerId + " was not found") ;
+//        }
+//
+//        return response;
+//    }
+
+    @GetMapping("/customer/edit/{customerId}")
+    public ModelAndView editCustomer(@PathVariable int customerId) {
+        ModelAndView response = new ModelAndView("customer/create");
+
+        Customer customer = customerDao.findById(customerId);
+
+        CreateCustomerFormBean form = new CreateCustomerFormBean();
+
+        if ( customer != null ) {
+
+            form.setFirstName(customer.getFirstName());
+            form.setLastName(customer.getLastName());
+            form.setPhone(customer.getPhone());
+            form.setCity(customer.getCity());
+        } else {
+            log.warn("Customer with id " + customerId + " was not found") ;
+        }
+
+        response.addObject("form", form);
+
+        return response;
+
+    }
 
     @GetMapping("/customer/create")
     public ModelAndView createCustomer() {

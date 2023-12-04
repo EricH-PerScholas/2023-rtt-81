@@ -58,6 +58,7 @@
                             <td>Last Name</td>
                             <td>Phone</td>
                             <td>City</td>
+                            <td>Edit</td>
                         </tr>
                         <c:forEach items="${customerVar}" var="customer">
                             <tr>
@@ -66,6 +67,7 @@
                                 <td>${customer.lastName}</td>
                                 <td>${customer.phone}</td>
                                 <td>${customer.city}</td>
+                                <td><a href="/customer/edit/${customer.id}">Edit</a></td>
                             </tr>
                         </c:forEach>
                     </table>
