@@ -15,13 +15,13 @@ public class CustomerService {
     private CustomerDAO customerDao;
 
     public void createCustomer(CreateCustomerFormBean form) {
-        log.debug("firstName: " + form.getXyz());
+        log.debug("firstName: " + form.getFirstName());
         log.info("lastName: " + form.getLastName());
         log.info("phone: " + form.getPhone());
         log.info("city: " + form.getCity());
 
         Customer customer = new Customer();
-        customer.setFirstName(form.getXyz());
+        customer.setFirstName(form.getFirstName());
         customer.setLastName(form.getLastName());
         customer.setPhone(form.getPhone());
         customer.setCity(form.getCity());
