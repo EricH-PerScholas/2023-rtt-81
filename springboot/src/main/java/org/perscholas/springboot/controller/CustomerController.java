@@ -111,7 +111,7 @@ public class CustomerController {
         CreateCustomerFormBean form = new CreateCustomerFormBean();
 
         if ( customer != null ) {
-
+            form.setId(customer.getId());
             form.setFirstName(customer.getFirstName());
             form.setLastName(customer.getLastName());
             form.setPhone(customer.getPhone());

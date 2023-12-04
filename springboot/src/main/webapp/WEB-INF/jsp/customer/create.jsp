@@ -17,7 +17,7 @@
     <div class="container">
         <!-- the action attribute on the form tag is the URL that the form will submit to when then user clicks the submit button -->
         <form method="get" action="/customer/createSubmit">
-
+            <input type="hidden" name="id" value="${form.id}">
 
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
