@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
 
@@ -13,8 +14,19 @@
 </section>
 
 
+
 <section class="pt-5 pb-5">
     <div class="container">
+        <c:if test="${not empty success}">
+            <div class="row justify-content-center">
+                <div class="col-6 text-center">
+                    <div class="alert alert-success" role="alert">
+                            ${success}
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
         <!-- the action attribute on the form tag is the URL that the form will submit to when then user clicks the submit button -->
         <form method="get" action="/customer/createSubmit">
             <input type="hidden" name="id" value="${form.id}">

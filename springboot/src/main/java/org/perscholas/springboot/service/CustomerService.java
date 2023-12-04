@@ -14,7 +14,7 @@ public class CustomerService {
     @Autowired
     private CustomerDAO customerDao;
 
-    public void createCustomer(CreateCustomerFormBean form) {
+    public Customer createCustomer(CreateCustomerFormBean form) {
         log.debug("id: " + form.getId());
         log.debug("firstName: " + form.getFirstName());
         log.info("lastName: " + form.getLastName());
@@ -37,6 +37,6 @@ public class CustomerService {
         customer.setPhone(form.getPhone());
         customer.setCity(form.getCity());
 
-        customerDao.save(customer);
+        return customerDao.save(customer);
     }
 }

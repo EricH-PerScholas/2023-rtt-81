@@ -46,7 +46,6 @@ public class CustomerController {
     // 1. Run all of the methods marked with @PostConstruct
 
 
-
     @Autowired
     private CustomerDAO customerDao;
 
@@ -103,21 +102,26 @@ public class CustomerController {
 //    }
 
     @GetMapping("/customer/edit/{customerId}")
-    public ModelAndView editCustomer(@PathVariable int customerId) {
+    public ModelAndView editCustomer(@PathVariable int customerId, @RequestParam(required = false) String success) {
+        log.info("######################### In /customer/edit #########################");
         ModelAndView response = new ModelAndView("customer/create");
 
         Customer customer = customerDao.findById(customerId);
 
+        if (!StringUtils.isEmpty(success)) {
+            response.addObject("success", success);
+        }
+
         CreateCustomerFormBean form = new CreateCustomerFormBean();
 
-        if ( customer != null ) {
+        if (customer != null) {
             form.setId(customer.getId());
             form.setFirstName(customer.getFirstName());
             form.setLastName(customer.getLastName());
             form.setPhone(customer.getPhone());
             form.setCity(customer.getCity());
         } else {
-            log.warn("Customer with id " + customerId + " was not found") ;
+            log.warn("Customer with id " + customerId + " was not found");
         }
 
         response.addObject("form", form);
@@ -140,11 +144,15 @@ public class CustomerController {
     // the action attribute on the form tag is set to /customer/createSubmit so this method will be called when the user clicks the submit button
     @GetMapping("/customer/createSubmit")
     public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
-        ModelAndView response = new ModelAndView("customer/create");
+        log.info("######################### In create customer submit #########################");
 
-        customerService.createCustomer(form);
+        Customer c = customerService.createCustomer(form);
 
-        log.info("In create customer with incoming args");
+        // the view name can either be a jsp file name or a redirect to another controller method
+        ModelAndView response = new ModelAndView();
+        response.setViewName("redirect:/customer/edit/" + c.getId() + "?success=Customer Saved Successfully");
+
+
 
         return response;
     }
