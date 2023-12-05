@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<jsp:include page="include/header.jsp"/>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+<section>
+    <div class="bg-light2 pt-5 pb-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="m-0">Home Page</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <title>Class Example Project</title>
-</head>
-<body>
-<h1>Index Page</h1>
-<p>Here is a paragraph - adding more text to this </p>
-</body>
-</html>
+
+<jsp:include page="include/footer.jsp"/>
