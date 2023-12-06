@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SlashController {
 
-    @GetMapping("/index")
+    @GetMapping(value =  { "/index", "/" }  )
     public ModelAndView index() {
         ModelAndView response = new ModelAndView("index");
         return response;

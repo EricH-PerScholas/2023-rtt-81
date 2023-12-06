@@ -29,6 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        log.debug("User login attempt with username: " + username);
+
         // lookup the incoming username in the database
         User user = userDao.findByEmailIgnoreCase(username);
 
