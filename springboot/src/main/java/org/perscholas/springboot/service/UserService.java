@@ -17,7 +17,7 @@ public class UserService {
     public User createNewUser(RegisterUserFormBean form) {
         User user = new User();
 
-        user.setEmail(form.getEmail());
+        user.setEmail(form.getEmail().toLowerCase());
         user.setPassword(form.getPassword());
 
         return userDao.save(user);
