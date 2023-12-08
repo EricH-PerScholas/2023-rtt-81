@@ -36,6 +36,12 @@ public class CustomerService {
         customer.setLastName(form.getLastName());
         customer.setPhone(form.getPhone());
         customer.setCity(form.getCity());
+        
+
+        // if you want to use your own images, put them in the /pub/images folder
+        // when editing the customer enter /pub/images/imagename.gif as your image url in the database to display your own image
+        // alternatively you can give a full url of an image somewhere on the internet
+        customer.setImageUrl(form.getImageUrl());
 
         return customerDao.save(customer);
     }

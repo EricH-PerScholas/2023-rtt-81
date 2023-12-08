@@ -30,4 +30,6 @@ public class CreateCustomerFormBean {
     private String city;
 
 
+    private String imageUrl;
+
 }
