@@ -31,4 +31,7 @@ public class Customer {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "user_id")
+    private Integer userId;
+
 }

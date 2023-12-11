@@ -175,5 +175,15 @@ public class CustomerController {
 
     }
 
+    @GetMapping("/customer/myCustomers")
+    public void myCustomers() {
+        log.info("######################### In my customers #########################");
+
+        // 1) Use the authenticated user service to find the logged in user
+        // 2) Create a DAO method that will find by userId
+        // 3) use the authenticated user id to find a list of all customers created by this user
+        // 4) loop over the customers created and log.debug the customer id and customer last name
+
+    }
 
 }

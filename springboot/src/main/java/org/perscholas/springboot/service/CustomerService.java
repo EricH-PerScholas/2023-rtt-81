@@ -3,7 +3,9 @@ package org.perscholas.springboot.service;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
+import org.perscholas.springboot.database.entity.User;
 import org.perscholas.springboot.formbean.CreateCustomerFormBean;
+import org.perscholas.springboot.security.AuthenticatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class CustomerService {
 
     @Autowired
     private CustomerDAO customerDao;
+
+    @Autowired
+    private AuthenticatedUserService authenticatedUserService;
 
     public Customer createCustomer(CreateCustomerFormBean form) {
         log.debug("id: " + form.getId());
@@ -29,6 +34,13 @@ public class CustomerService {
         // if the customer is null then we know that this is a create and we have to make a new object
         if ( customer == null ) {
             customer = new Customer();
+
+            // these lien of code loads the current logged in user record from the database
+            User user = authenticatedUserService.loadCurrentUser();
+            // then we can set the user id onto the customer record we are about to create
+            // I am doing here because I only want to update the userid on the customer when it is being created
+            customer.setUserId(user.getId());
+
         }
 
         // set the incoming values to be save to the database
