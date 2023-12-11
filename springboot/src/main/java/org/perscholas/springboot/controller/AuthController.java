@@ -1,11 +1,13 @@
 package org.perscholas.springboot.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.database.entity.User;
 import org.perscholas.springboot.formbean.RegisterUserFormBean;
+import org.perscholas.springboot.security.AuthenticatedUserService;
 import org.perscholas.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -21,6 +23,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticatedUserService authenticatedUserService;
 
 
     @GetMapping("/auth/login")
@@ -40,7 +45,7 @@ public class AuthController {
     }
 
     @GetMapping("/auth/registerSubmit")
-    public ModelAndView registerSubmit(@Valid RegisterUserFormBean form, BindingResult bindingResult) {
+    public ModelAndView registerSubmit(@Valid RegisterUserFormBean form, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors()) {
             log.info("######################### In register user - has errors #########################");
             ModelAndView response = new ModelAndView("auth/register");
@@ -56,7 +61,12 @@ public class AuthController {
 
         log.info("######################### In register user - no error found #########################");
 
-       User u = userService.createNewUser(form);
+        User u = userService.createNewUser(form);
+
+        // this line of code will authenticate the brand new user to the application
+        // the session we are passing into this method as an argument and spring boot is automatically managing the session
+        // and is able to figure out the new argument to the controller method and populate it with the correct session
+        authenticatedUserService.authenticateNewUser(session, u.getEmail(), form.getPassword());
 
         // the view name can either be a jsp file name or a redirect to another controller method
         ModelAndView response = new ModelAndView();
