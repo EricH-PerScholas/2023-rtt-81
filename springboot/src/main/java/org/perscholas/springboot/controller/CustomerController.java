@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -59,6 +60,15 @@ public class CustomerController {
 
     @Autowired
     private AuthenticatedUserService authenticatedUserService;
+
+    // 1) on the custoemr search results I want you to add another column that says Detail
+    // 2) This will be an <a href> tag that has the word Detail as the text very similar to how edit works
+    // 3) Create a new controller method for customer detail.  This controller method will take a request parm that is the customer id
+    // 4) in the customer DAO createa  findByid method that returns a single customer and uses the request param to find the customer
+    // 4) Create a new jsp file for customer detail that displays the customer id, first name, last name, phone, city, and image url
+    //    none of these fields are editable.
+    // 5) on the customer detail page creaet a button that says "Edit" and when you click it it will take you to the edit page for that customer
+
 
     @GetMapping("/customer/search")
     public ModelAndView search(@RequestParam(required = false) String firstNameSearch,
@@ -196,6 +206,25 @@ public class CustomerController {
             log.debug("customer: id = " + customer.getId() + " last name = " + customer.getLastName());
         }
 
+    }
+
+
+    @RequestMapping("/customer/detail")
+    public ModelAndView detail(@RequestParam Integer id) {
+        ModelAndView response = new ModelAndView("customer/detail");
+
+        Customer customer = customerDao.findById(id);
+
+        if ( customer == null ) {
+            log.warn("Customer with id " + id + " was not found");
+            // in a real application you might redirect to a 404 here because the custoemr was nto found
+            response.setViewName("redirect:/error/404");
+            return response;
+        }
+
+        response.addObject("customer", customer);
+
+        return response;
     }
 
 }
