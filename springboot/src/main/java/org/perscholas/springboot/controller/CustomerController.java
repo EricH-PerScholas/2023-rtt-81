@@ -4,6 +4,7 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.database.entity.User;
@@ -19,12 +20,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Slf4j
@@ -202,7 +205,7 @@ public class CustomerController {
         List<Customer> customers = customerDao.findByUserId(user.getId());
 
         // 4) loop over the customers created and log.debug the customer id and customer last name
-        for ( Customer customer : customers ) {
+        for (Customer customer : customers) {
             log.debug("customer: id = " + customer.getId() + " last name = " + customer.getLastName());
         }
 
@@ -215,7 +218,7 @@ public class CustomerController {
 
         Customer customer = customerDao.findById(id);
 
-        if ( customer == null ) {
+        if (customer == null) {
             log.warn("Customer with id " + id + " was not found");
             // in a real application you might redirect to a 404 here because the custoemr was nto found
             response.setViewName("redirect:/error/404");
@@ -227,4 +230,42 @@ public class CustomerController {
         return response;
     }
 
+
+    @GetMapping("/customer/fileupload")
+    public ModelAndView fileUpload(@RequestParam Integer id) {
+        ModelAndView response = new ModelAndView("customer/fileupload");
+
+        Customer customer = customerDao.findById(id);
+        response.addObject("customer", customer);
+
+        log.info(" In fileupload with no Args");
+        return response;
+    }
+
+    @PostMapping("/customer/fileUploadSubmit")
+    public ModelAndView fileUploadSubmit(@RequestParam("file") MultipartFile file,
+                                         @RequestParam Integer id) {
+        ModelAndView response = new ModelAndView("redirect:/customer/detail?id=" + id);
+
+        log.info("Filename = " + file.getOriginalFilename());
+        log.info("Size     = " + file.getSize());
+        log.info("Type     = " + file.getContentType());
+
+
+        // Get the file and save it somewhere
+        File f = new File("./src/main/webapp/pub/images/" + file.getOriginalFilename());
+        try (OutputStream outputStream = new FileOutputStream(f.getAbsolutePath())) {
+            IOUtils.copy(file.getInputStream(), outputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // these 3 lines of code will load the customer by the id passed in
+        // update the image url field and then save the customer to the database
+        Customer customer = customerDao.findById(id);
+        customer.setImageUrl("/pub/images/" + file.getOriginalFilename());
+        customerDao.save(customer);
+
+        return response;
+    }
 }

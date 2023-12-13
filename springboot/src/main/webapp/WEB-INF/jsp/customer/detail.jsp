@@ -12,7 +12,6 @@
     </div>
 </section>
 
-
 <section>
     <table>
         <div class="card" style="width: 18rem;">
