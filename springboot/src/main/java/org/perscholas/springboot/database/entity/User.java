@@ -3,8 +3,11 @@ package org.perscholas.springboot.database.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -23,6 +26,10 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Customer> customers;
 
     // NEVER EVER use java.sql.Date
     // must always use java.util.Date

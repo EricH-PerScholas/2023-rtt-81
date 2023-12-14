@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.print.Book;
+
 @Getter
 @Setter
 @Entity
@@ -31,7 +33,11 @@ public class Customer {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "user_id")
-    private Integer userId;
+//    @Column(name = "user_id")
+//    private Integer userId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 }

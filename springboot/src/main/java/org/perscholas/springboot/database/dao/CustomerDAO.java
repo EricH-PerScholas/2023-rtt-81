@@ -15,7 +15,7 @@ public interface CustomerDAO extends JpaRepository<Customer, Long> {
     @Query("SELECT c FROM Customer c WHERE c.firstName LIKE :firstName or c.lastName LIKE :lastName")
     List<Customer> findByFirstNameOrLastName(String firstName, String lastName);
 
-    @Query("SELECT c FROM Customer c WHERE c.userId = :userId")
+    @Query("SELECT c FROM Customer c WHERE c.user.id = :userId")
     List<Customer> findByUserId(Integer userId);
 
 

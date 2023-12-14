@@ -245,7 +245,8 @@ public class CustomerController {
     @PostMapping("/customer/fileUploadSubmit")
     public ModelAndView fileUploadSubmit(@RequestParam("file") MultipartFile file,
                                          @RequestParam Integer id) {
-        ModelAndView response = new ModelAndView("redirect:/customer/detail?id=" + id);
+        ModelAndView response = new ModelAndView(
+                "redirect:/customer/detail?id=" + id);
 
         log.info("Filename = " + file.getOriginalFilename());
         log.info("Size     = " + file.getSize());
