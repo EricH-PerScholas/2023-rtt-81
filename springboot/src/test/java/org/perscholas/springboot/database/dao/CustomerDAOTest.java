@@ -24,6 +24,7 @@ public class CustomerDAOTest {
         customer.setLastName("Test Last");
         customer.setCity("Test City");
         customer.setPhone("Test Phone");
+        customer.setImageUrl("image url");
 
         // when
         customer = customerDAO.save(customer);
@@ -34,6 +35,8 @@ public class CustomerDAOTest {
         Assertions.assertEquals("Test Last", customer.getLastName());
         Assertions.assertEquals("Test City", customer.getCity());
         Assertions.assertEquals("Test Phone", customer.getPhone());
+        Assertions.assertEquals("image url", customer.getImageUrl());
+        Assertions.assertNull(customer.getUser());
     }
 
     @Test
@@ -54,6 +57,8 @@ public class CustomerDAOTest {
         Assertions.assertEquals("Test Last", customer.getLastName());
         Assertions.assertEquals("Test City", customer.getCity());
         Assertions.assertEquals("Test Phone", customer.getPhone());
+        Assertions.assertEquals("image url", customer.getImageUrl());
+        Assertions.assertNull(customer.getUser());
     }
 
     @Test
@@ -67,6 +72,19 @@ public class CustomerDAOTest {
 
         // then
         Assertions.assertEquals(1, deleted);
+    }
+
+    @Test
+    @Order(4)
+    public void shouldNotExistTest() {
+        // given
+        String firstName = "Test First 12345";
+
+        // when
+        List<Customer> customers = customerDAO.findByFirstNameOrLastName(firstName, null);
+
+        // then
+        Assertions.assertEquals(0, customers.size());
     }
 
 }
